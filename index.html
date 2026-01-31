@@ -10,6 +10,7 @@
             --bg-color: #0d1117;
             --card-bg: #161b22;
             --accent-color: #58a6ff;
+            --secondary-color: #238636; /* Green for "Published" status */
             --text-main: #c9d1d9;
             --text-dim: #8b949e;
             --border-color: #30363d;
@@ -23,31 +24,30 @@
             line-height: 1.6;
         }
 
+        /* Header Styling */
         header {
-            height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 80px 20px;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
             background: radial-gradient(circle at top, #1e252e 0%, #0d1117 100%);
         }
 
+        h1 { font-size: 2.8rem; color: #fff; margin-bottom: 10px; }
+        .subtitle { color: var(--accent-color); font-weight: bold; font-size: 1.2rem; }
+        .contact-info { margin-top: 20px; color: var(--text-dim); font-size: 0.9rem; }
+        
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
-        h1 { font-size: 2.5rem; color: #fff; margin-bottom: 10px; }
-        .subtitle { color: var(--accent-color); font-weight: bold; font-size: 1.2rem; }
-
         .section-title {
             border-left: 4px solid var(--accent-color);
             padding-left: 15px;
-            margin-bottom: 30px;
+            margin: 50px 0 30px 0;
             color: #fff;
+            font-size: 1.8rem;
         }
 
         /* Projects Grid */
@@ -61,13 +61,26 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 20px;
+            padding: 25px;
             transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
         }
 
         .project-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent-color);
+        }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(35, 134, 54, 0.2);
+            color: #3fb950;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(35, 134, 54, 0.4);
         }
 
         .project-tag {
@@ -77,35 +90,65 @@
             border-radius: 4px;
             font-size: 0.8rem;
             margin-right: 5px;
+            display: inline-block;
+            margin-top: 5px;
         }
 
-        .btn {
+        /* Timeline / Experience Section */
+        .timeline-item {
+            border-left: 2px solid var(--border-color);
+            padding-left: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            position: absolute;
+            left: -7px;
+            top: 5px;
+        }
+
+        .role-title { color: #fff; font-size: 1.1rem; font-weight: bold; margin: 0; }
+        .company-name { color: var(--accent-color); font-size: 0.95rem; }
+        .date-range { color: var(--text-dim); font-size: 0.85rem; font-style: italic; margin-bottom: 8px; display: block;}
+
+        /* Skills & Certs */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .skill-group h4 { margin: 10px 0 5px 0; color: var(--text-dim); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;}
+
+        .skill-pill {
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.03);
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 50px;
+        }
+
+        a.btn {
             display: inline-block;
             margin-top: 15px;
             color: var(--accent-color);
             text-decoration: none;
             font-weight: bold;
-        }
-
-        /* Skills Section */
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .skill-item {
-            border: 1px solid var(--border-color);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-dim);
-            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -113,65 +156,119 @@
 
 <header>
     <h1>Muhammed Ameen P. M.</h1>
-    <p class="subtitle">Electronics & Communication Engineer | IEEE CAS Vice Chair</p>
-    <p style="max-width: 600px; padding: 0 20px;">Focused on Digital Signal Processing, VLSI Design, and Machine Learning applications for healthcare.</p>
+    <p class="subtitle">B.Tech ECE | Researcher | Designer</p>
+    <p style="max-width: 600px; margin: 10px auto; padding: 0 20px;">
+        Engineering student bridging the gap between <strong>Embedded Systems</strong>, <strong>VLSI</strong>, and <strong>Healthcare AI</strong>.
+    </p>
+    <div class="contact-info">
+        <i class="fas fa-map-marker-alt"></i> Kollam, Kerala &bull; 
+        <i class="fas fa-university"></i> TKM College of Engineering (2023-2027)
+    </div>
 </header>
 
 <div class="container">
     
-    <h2 class="section-title">Featured Projects</h2>
+    <h2 class="section-title">Research & Projects</h2>
     <div class="project-grid">
-        <div class="project-card">
-            <h3>ApneaSense</h3>
-            <p>A sleep apnea monitoring device developed for the IEEE CASS Student Design Competition.</p>
+        <div class="project-card" style="border-color: var(--secondary-color);">
+            <div class="badge">IEEE Xplore Accepted</div>
+            <h3>AI-Based Heart Disease Detection</h3>
+            <p>Research presented at <strong>ICAACT</strong> using Deep Learning (DSNN) to classify heart conditions via ECG & PCG signals.</p>
             <div>
-                <span class="project-tag">DSP</span>
-                <span class="project-tag">Sensors</span>
-                <span class="project-tag">Healthcare</span>
+                <span class="project-tag">Deep Learning</span>
+                <span class="project-tag">Python/TensorFlow</span>
+                <span class="project-tag">Biomedical</span>
             </div>
-            <a href="#" class="btn">View Documentation →</a>
+            <a href="#" class="btn">View Publication <i class="fas fa-arrow-right"></i></a>
         </div>
 
         <div class="project-card">
-            <h3>ToxGuard</h3>
-            <p>Industrial safety system using ESP32 and a Flask-based dashboard for real-time gas monitoring.</p>
+            <h3>Smart Wearable Safety Guardian</h3>
+            <p><strong>"ToxGuard"</strong>: An industrial safety device for workers using ESP32 sensors and a Flask dashboard for real-time monitoring.</p>
             <div>
-                <span class="project-tag">IoT</span>
+                <span class="project-tag">IoT / Embedded</span>
                 <span class="project-tag">Flask</span>
                 <span class="project-tag">ESP32</span>
             </div>
-            <a href="#" class="btn">GitHub Repo →</a>
+            <a href="#" class="btn">View GitHub <i class="fab fa-github"></i></a>
         </div>
 
         <div class="project-card">
-            <h3>DSNN Heart Classification</h3>
-            <p>Research project utilizing Deep Learning (DSNN) for heart disease classification via ECG/PCG signals.</p>
+            <h3>ApneaSense</h3>
+            <p>Sleep apnea monitoring system developed for the <strong>IEEE CASS Student Design Competition</strong>.</p>
             <div>
-                <span class="project-tag">Deep Learning</span>
-                <span class="project-tag">Python</span>
-                <span class="project-tag">TensorFlow</span>
+                <span class="project-tag">Sensors</span>
+                <span class="project-tag">Analog Circuits</span>
+                <span class="project-tag">Healthcare</span>
             </div>
-            <a href="#" class="btn">Research Paper →</a>
+            <a href="#" class="btn">View Details <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
 
-    <br><br>
+    <h2 class="section-title">Experience & Leadership</h2>
+    
+    <div class="timeline-item">
+        <h3 class="role-title">Project Intern (Embedded Systems)</h3>
+        <span class="company-name">Believers Church Medical College Hospital</span>
+        <span class="date-range">June 2024 (1 mo) | Thiruvalla, Kerala</span>
+        <p>Gained hands-on experience in <strong>Embedded Devices</strong> and <strong>Medical Electronics</strong>, bridging clinical needs with engineering solutions.</p>
+    </div>
 
-    <h2 class="section-title">Technical Toolkit</h2>
-    <div class="skills-list">
-        <div class="skill-item">VLSI (RTL Design)</div>
-        <div class="skill-item">System-on-Chip (SoC)</div>
-        <div class="skill-item">Embedded C / Arduino</div>
-        <div class="skill-item">Digital Signal Processing</div>
-        <div class="skill-item">Python (Keras/TensorFlow)</div>
-        <div class="skill-item">Adobe Photoshop</div>
-        <div class="skill-item">STM32 Microcontrollers</div>
+    <div class="timeline-item">
+        <h3 class="role-title">Vice Chair</h3>
+        <span class="company-name">IEEE CAS SB TKMCE</span>
+        <span class="date-range">Jan 2024 - Present</span>
+        <p>Leading technical initiatives, focusing on <strong>FPGA Prototyping</strong> and <strong>Analog Circuit Design</strong> workshops.</p>
+    </div>
+
+    <div class="timeline-item">
+        <h3 class="role-title">Design Head</h3>
+        <span class="company-name">Mathventures TKMCE</span>
+        <span class="date-range">May 2024 - Present</span>
+        <p>Leading the creative team for club events. Previously served as Designer (Jan - May 2024).</p>
+    </div>
+
+    <div class="timeline-item">
+        <h3 class="role-title">Graphic Designer</h3>
+        <span class="company-name">IEEE SB TKMCE</span>
+        <span class="date-range">Jan 2024 - Present</span>
+        <p>Specialized in visual communication and branding using <strong>Adobe Photoshop</strong>.</p>
+    </div>
+
+    <h2 class="section-title">Technical Skills & Certifications</h2>
+    <div class="skills-container">
+        <div class="skill-group">
+            <span class="skill-pill">VLSI / RTL</span>
+            <span class="skill-pill">FPGA Prototyping</span>
+            <span class="skill-pill">Arduino / ESP32</span>
+            <span class="skill-pill">Analog Circuit Design</span>
+        </div>
+        <div class="skill-group">
+            <span class="skill-pill">Python (TensorFlow/Keras)</span>
+            <span class="skill-pill">Java (NPTEL Certified)</span>
+            <span class="skill-pill">C Programming</span>
+        </div>
+        <div class="skill-group">
+            <span class="skill-pill">Adobe Photoshop</span>
+            <span class="skill-pill">Graphic Design</span>
+            <span class="skill-pill">AutoCAD</span>
+        </div>
+    </div>
+    
+    <div style="margin-top: 30px;">
+        <h4 style="color:var(--text-dim); text-transform:uppercase; font-size: 0.9rem;">Education</h4>
+        <p><strong>TKM College of Engineering</strong> - B.Tech ECE (2023-2027)<br>
+        <span style="color:var(--text-dim); font-size:0.9rem;">St. Joseph's HSS Kodenchery (98.4%)</span></p>
     </div>
 
 </div>
 
 <footer>
-    <p>&copy; 2026 Muhammed Ameen. Built with code and curiosity.</p>
+    <p>&copy; 2026 Muhammed Ameen P. M. <br>
+    <a href="#" style="color:var(--accent-color); text-decoration:none;">LinkedIn</a> &bull; 
+    <a href="#" style="color:var(--accent-color); text-decoration:none;">GitHub</a> &bull; 
+    <a href="mailto:your-email@example.com" style="color:var(--accent-color); text-decoration:none;">Email</a>
+    </p>
 </footer>
 
 </body>
