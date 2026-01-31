@@ -3,362 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammed Ameen | Engineering Portfolio</title>
+    <title>Muhammed Ameen | VLSI & Embedded Portfolio</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            /* THEME: Black, White, Orange */
-            --bg-color: #000000;
-            --card-bg: #111111;
-            --accent-color: #ff6600; /* Vibrant Orange */
+            /* THEME: Deep Space Black, Neon Orange, White */
+            --bg-color: #050505;
+            --card-bg: rgba(20, 20, 20, 0.7); /* Semi-transparent for Glassmorphism */
+            --accent-color: #ff6600; 
             --text-main: #ffffff;
-            --text-dim: #cccccc;
-            --border-color: #333333;
+            --text-dim: #a0a0a0;
+            --border-color: #333;
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(255, 102, 0, 0.08), transparent 25%), 
+                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.05), transparent 25%);
             color: var(--text-main);
             margin: 0;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Header Styling */
+        /* HEADER & TYPING ANIMATION */
         header {
-            padding: 80px 20px;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            border-bottom: 2px solid var(--border-color);
-            background: radial-gradient(circle at top, #1a1a1a 0%, #000000 100%);
+            padding: 20px;
+            position: relative;
         }
 
         h1 { 
-            font-size: 2.8rem; 
-            color: #fff; 
-            margin-bottom: 10px; 
+            font-size: 3.5rem; 
+            margin: 0; 
             text-transform: uppercase; 
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            background: -webkit-linear-gradient(#fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
-        .subtitle { 
-            color: var(--accent-color); 
-            font-weight: bold; 
-            font-size: 1.2rem; 
+        .typewriter {
+            display: inline-block;
+            overflow: hidden; 
+            border-right: .15em solid var(--accent-color); 
+            white-space: nowrap; 
+            margin: 20px auto; 
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: .15em;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-color) }
+        }
+
+        .header-bio {
+            max-width: 600px;
+            color: var(--text-dim);
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+
+        .cta-button {
+            margin-top: 30px;
+            padding: 12px 30px;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
             letter-spacing: 1px;
+            transition: 0.3s;
         }
-        
-        .contact-info { margin-top: 20px; color: var(--text-dim); font-size: 0.9rem; }
-        
+
+        .cta-button:hover {
+            background: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
+        }
+
         .container {
-            max-width: 1100px; /* Widened slightly for 3-column grid */
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 20px;
         }
 
         .section-title {
-            border-left: 5px solid var(--accent-color);
-            padding-left: 20px;
-            margin: 60px 0 30px 0;
-            color: #fff;
             font-size: 2rem;
             text-transform: uppercase;
-            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            display: inline-block;
         }
 
-        /* Projects Grid */
+        /* GLASSMORPHISM CARDS */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+            gap: 30px;
         }
 
         .project-card {
             background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            padding: 25px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 12px;
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-            position: relative;
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             border-color: var(--accent-color);
-            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .badge {
+        .project-card h3 { margin-top: 0; color: #fff; }
+        .project-card p { color: var(--text-dim); font-size: 0.95rem; flex-grow: 1; }
+
+        .tech-stack {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #aaa;
+        }
+
+        .badge-publish {
             position: absolute;
-            top: 20px;
+            top: -10px;
             right: 20px;
             background: var(--accent-color);
             color: #000;
+            padding: 5px 15px;
+            font-size: 0.8rem;
             font-weight: bold;
-            padding: 4px 10px;
-            border-radius: 2px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
         }
 
-        .project-card h3 { margin-top: 0; margin-bottom: 10px; color: #fff;}
-        .project-card p { flex-grow: 1; font-size: 0.95rem; color: var(--text-dim); }
-
-        .project-tag {
-            border: 1px solid var(--border-color);
-            color: var(--text-dim);
-            padding: 4px 10px;
-            border-radius: 2px;
-            font-size: 0.75rem;
-            margin-right: 5px;
-            display: inline-block;
-            margin-top: 10px;
+        /* SKILLS SECTION WITH PRESTIGE HIGHLIGHTS */
+        .skills-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
         }
-        
-        .project-card:hover .project-tag {
-            border-color: var(--accent-color);
+
+        .skill-category h4 {
             color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
         }
 
-        /* Timeline / Experience Section */
+        .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skill-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            color: #ddd;
+        }
+
+        .skill-list li i {
+            margin-right: 10px;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        /* Highlight specific pro tools */
+        .pro-tool {
+            color: #fff !important;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        /* TIMELINE (Simple & Clean) */
+        .timeline {
+            border-left: 2px solid #333;
+            padding-left: 30px;
+            margin-top: 20px;
+        }
+
         .timeline-item {
-            border-left: 2px solid var(--border-color);
-            padding-left: 25px;
-            margin-bottom: 40px;
             position: relative;
+            margin-bottom: 40px;
         }
 
         .timeline-item::before {
             content: '';
+            position: absolute;
+            left: -36px;
+            top: 5px;
             width: 10px;
             height: 10px;
-            background: var(--bg-color);
-            border: 2px solid var(--accent-color);
+            background: var(--accent-color);
             border-radius: 50%;
-            position: absolute;
-            left: -8px;
-            top: 6px;
+            box-shadow: 0 0 10px var(--accent-color);
         }
 
-        .role-title { color: #fff; font-size: 1.2rem; font-weight: bold; margin: 0; }
-        .company-name { color: var(--accent-color); font-size: 1rem; font-weight: 600; }
-        .date-range { color: var(--text-dim); font-size: 0.85rem; font-family: monospace; display: block; margin-top: 5px;}
-
-        /* Skills */
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .skill-group h4 { margin: 10px 0 5px 0; color: var(--accent-color); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;}
-
-        .skill-pill {
-            background: #1a1a1a;
-            border: 1px solid var(--border-color);
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 0px;
-            font-size: 0.9rem;
-            transition: 0.2s;
-        }
-        
-        .skill-pill:hover {
-            border-color: var(--accent-color);
-            background: #000;
-        }
+        .role { font-size: 1.1rem; font-weight: bold; color: #fff; }
+        .org { color: var(--accent-color); }
+        .date { font-size: 0.85rem; color: #666; font-family: monospace; }
 
         footer {
             text-align: center;
-            padding: 60px 20px;
-            color: var(--text-dim);
+            padding: 50px;
+            color: #555;
             font-size: 0.9rem;
-            border-top: 2px solid var(--border-color);
-            margin-top: 60px;
-            background: #050505;
         }
 
-        a.btn {
-            display: inline-block;
-            margin-top: 20px;
-            color: #000;
-            background: var(--accent-color);
-            padding: 8px 16px;
-            border-radius: 2px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-align: center;
-            transition: 0.2s;
-        }
-        
-        a.btn:hover { background: #fff; }
-        a.footer-link { color: #fff; text-decoration: none; margin: 0 10px; transition: color 0.2s; }
-        a.footer-link:hover { color: var(--accent-color); }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Muhammed Ameen P. M.</h1>
-    <p class="subtitle">B.Tech ECE | Researcher | Hardware Engineer</p>
-    <p style="max-width: 600px; margin: 15px auto; padding: 0 20px; color: #ccc;">
-        Building bridging solutions between <strong>Embedded Systems</strong>, <strong>Digital Logic</strong>, and <strong>Healthcare AI</strong>.
+    <h1>Muhammed Ameen P.M.</h1>
+    <div class="typewriter">DESIGNING CHIPS & SAVING LIVES</div>
+    
+    <p class="header-bio">
+        B.Tech ECE Student @ TKMCE <br>
+        VLSI &bull; Embedded Systems &bull; Healthcare AI
     </p>
-    <div class="contact-info">
-        <i class="fas fa-map-marker-alt" style="color:var(--accent-color)"></i> Kollam, Kerala &nbsp;|&nbsp; 
-        <i class="fas fa-university" style="color:var(--accent-color)"></i> TKM College of Engineering
-    </div>
+
+    <a href="#projects" class="cta-button">View My Work</a>
 </header>
 
-<div class="container">
-    
-    <h2 class="section-title">Innovation & Research</h2>
+<div class="container" id="projects">
+
+    <h2 class="section-title">Featured Engineering</h2>
     <div class="project-grid">
-        <div class="project-card" style="border-color: var(--accent-color);">
-            <div class="badge">Published</div>
+        
+        <div class="project-card">
+            <div class="badge-publish">IEEE PUBLISHED</div>
             <h3>AI-Based Heart Disease Detection</h3>
-            <p><strong>IEEE Xplore Accepted.</strong> Research using Deep Learning (DSNN) to classify heart conditions via ECG & PCG signals.</p>
-            <div>
-                <span class="project-tag">Deep Learning</span>
-                <span class="project-tag">Python/TensorFlow</span>
-                <span class="project-tag">Biomedical</span>
+            <p>A Deep Learning (DSNN) model to classify heart conditions using ECG & PCG signals with high accuracy.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">TensorFlow</span>
+                <span class="tech-tag">Signal Processing</span>
             </div>
-            <a href="#" class="btn">View Publication</a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" style="border-color: #333;">
             <h3>ApneaSense</h3>
-            <p>Sleep apnea monitoring device developed for the <strong>IEEE CASS Student Design Competition</strong>.</p>
-            <div>
-                <span class="project-tag">IEEE CASS</span>
-                <span class="project-tag">Sensors</span>
-                <span class="project-tag">Healthcare</span>
+            <p>Sleep apnea monitoring system designed for the IEEE CASS Student Design Competition.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Sensors</span>
+                <span class="tech-tag">Analog Circuits</span>
+                <span class="tech-tag">Healthcare</span>
             </div>
-            <a href="#" class="btn">View Project</a>
         </div>
 
         <div class="project-card">
             <h3>ToxGuard</h3>
-            <p><strong>Hackathon Project.</strong> Wearable industrial safety system using ESP32 and Flask for real-time gas monitoring.</p>
-            <div>
-                <span class="project-tag">IoT / ESP32</span>
-                <span class="project-tag">Flask</span>
-                <span class="project-tag">Safety</span>
+            <p>Wearable industrial safety system. Uses ESP32 to detect gas leaks and streams data to a Flask dashboard.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">IoT / ESP32</span>
+                <span class="tech-tag">Flask</span>
+                <span class="tech-tag">Figma UI</span>
             </div>
-            <a href="#" class="btn">View GitHub</a>
         </div>
     </div>
 
-    <h2 class="section-title">Core Electronics Projects</h2>
+    <h2 class="section-title" style="margin-top: 80px;">Core Projects</h2>
     <div class="project-grid">
         <div class="project-card">
-            <h3>Password-Based Circuit Breaker</h3>
-            <p>Security system using <strong>8051 Microcontroller</strong> & Keypad. Features EEPROM storage and custom PCB implementation.</p>
-            <div>
-                <span class="project-tag">8051 (AT89S52)</span>
-                <span class="project-tag">PCB Design</span>
-                <span class="project-tag">Embedded C</span>
+            <h3>Password Circuit Breaker</h3>
+            <p>Security system using <strong>8051 Microcontroller</strong>. Features EEPROM password storage and custom PCB.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">8051 Assembly/C</span>
+                <span class="tech-tag">PCB Design</span>
             </div>
-            <a href="#" class="btn">Jan 2025 - May 2025</a>
         </div>
 
         <div class="project-card">
             <h3>Digital Visitor Counter</h3>
-            <p>IR-based people counter using <strong>4026 IC</strong> & 7-Segment Display. Automated room capacity monitoring.</p>
-            <div>
-                <span class="project-tag">Digital Logic</span>
-                <span class="project-tag">4026 IC</span>
-                <span class="project-tag">IR Sensors</span>
+            <p>Automated room capacity monitoring using IR sensors and 4026 IC decade counters.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Digital Logic</span>
+                <span class="tech-tag">4026 IC</span>
             </div>
-            <a href="#" class="btn">Jun 2024 - Dec 2024</a>
         </div>
 
         <div class="project-card">
             <h3>Sun Tracking Solar Panel</h3>
-            <p>Dual-axis solar tracker using <strong>Arduino Uno</strong> and LDRs to maximize energy capture efficiency.</p>
-            <div>
-                <span class="project-tag">Arduino Uno</span>
-                <span class="project-tag">Servo Motors</span>
-                <span class="project-tag">LDR</span>
-            </div>
-            <a href="#" class="btn">Sep 2023 - Dec 2023</a>
-        </div>
-    </div>
-
-    <h2 class="section-title">Experience & Leadership</h2>
-    
-    <div class="timeline-item">
-        <h3 class="role-title">Project Intern (Embedded Systems)</h3>
-        <span class="company-name">Believers Church Medical College Hospital</span>
-        <span class="date-range">June 2024 (1 mo) | Thiruvalla, Kerala</span>
-        <p>Bridged clinical needs with engineering by working on <strong>Embedded Devices</strong> and <strong>Medical Electronics</strong>.</p>
-    </div>
-
-    <div class="timeline-item">
-        <h3 class="role-title">Vice Chair</h3>
-        <span class="company-name">IEEE CAS SB TKMCE</span>
-        <span class="date-range">Jan 2024 - Present</span>
-        <p>Leading technical initiatives, focusing on FPGA Prototyping and Analog Circuit Design workshops.</p>
-    </div>
-
-    <div class="timeline-item">
-        <h3 class="role-title">Design Head</h3>
-        <span class="company-name">Mathventures TKMCE</span>
-        <span class="date-range">May 2024 - Present</span>
-        <p>Leading the creative team for club events. Previously served as Designer (Jan - May 2024).</p>
-    </div>
-
-    <div class="timeline-item">
-        <h3 class="role-title">Graphic Designer</h3>
-        <span class="company-name">IEEE SB TKMCE</span>
-        <span class="date-range">Jan 2024 - Present</span>
-        <p>Specialized in visual communication and branding using Adobe Photoshop.</p>
-    </div>
-
-    <h2 class="section-title">Technical Skills</h2>
-    <div class="skills-container">
-        <div class="skill-group" style="flex: 1; min-width: 250px;">
-            <h4>Hardware & VLSI</h4>
-            <div style="display:flex; flex-wrap:wrap; gap:10px;">
-                <span class="skill-pill">8051 / AT89S52</span>
-                <span class="skill-pill">PCB Design</span>
-                <span class="skill-pill">VLSI / RTL</span>
-                <span class="skill-pill">Arduino / ESP32</span>
-            </div>
-        </div>
-        <div class="skill-group" style="flex: 1; min-width: 250px;">
-            <h4>Software</h4>
-            <div style="display:flex; flex-wrap:wrap; gap:10px;">
-                <span class="skill-pill">Embedded C</span>
-                <span class="skill-pill">Python (TensorFlow)</span>
-                <span class="skill-pill">Java</span>
-            </div>
-        </div>
-        <div class="skill-group" style="flex: 1; min-width: 250px;">
-            <h4>Design</h4>
-            <div style="display:flex; flex-wrap:wrap; gap:10px;">
-                <span class="skill-pill">Adobe Photoshop</span>
-                <span class="skill-pill">AutoCAD</span>
+            <p>Dual-axis tracker using Arduino Uno and LDRs. Increased energy efficiency significantly over static panels.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Arduino</span>
+                <span class="tech-tag">Servo Motors</span>
+                <span class="tech-tag">C++</span>
             </div>
         </div>
     </div>
-    
-    <div style="margin-top: 40px; border-top: 1px solid var(--border-color); padding-top: 20px;">
-        <h4 style="color:var(--text-dim); text-transform:uppercase; font-size: 0.9rem; margin-bottom: 10px;">Education</h4>
-        <p><strong>TKM College of Engineering</strong> - B.Tech ECE (2023-2027)<br>
-        <span style="color:var(--text-dim); font-size:0.9rem;">St. Joseph's HSS Kodenchery (98.4%)</span></p>
+
+    <h2 class="section-title" style="margin-top: 80px;">Technical Arsenal</h2>
+    <div class="skills-section">
+        
+        <div class="skill-category">
+            <h4>VLSI & Hardware</h4>
+            <ul class="skill-list">
+                <li class="pro-tool"><i class="fas fa-microchip"></i> Cadence Virtuoso</li>
+                <li class="pro-tool"><i class="fas fa-layer-group"></i> Xilinx Vivado</li>
+                <li><i class="fas fa-memory"></i> FPGA Prototyping</li>
+                <li><i class="fas fa-microchip"></i> 8051 / Arduino / ESP32</li>
+                <li><i class="fas fa-wave-square"></i> PCB Design</li>
+            </ul>
+        </div>
+
+        <div class="skill-category">
+            <h4>Software & AI</h4>
+            <ul class="skill-list">
+                <li><i class="fab fa-python"></i> Python (TensorFlow)</li>
+                <li><i class="fas fa-code"></i> Embedded C</li>
+                <li><i class="fab fa-java"></i> Java</li>
+                <li><i class="fas fa-database"></i> MATLAB</li>
+            </ul>
+        </div>
+
+        <div class="skill-category">
+            <h4>Design & Prototyping</h4>
+            <ul class="skill-list">
+                <li class="pro-tool"><i class="fab fa-figma"></i> Figma</li>
+                <li><i class="fas fa-pen-nib"></i> Adobe Photoshop</li>
+                <li><i class="fas fa-drafting-compass"></i> AutoCAD</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <h2 class="section-title" style="margin-top: 80px;">Experience</h2>
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="role">Vice Chair</div>
+            <div class="org">IEEE CAS SB TKMCE</div>
+            <div class="date">Jan 2024 - Present</div>
+        </div>
+        <div class="timeline-item">
+            <div class="role">Design Head</div>
+            <div class="org">Mathventures TKMCE</div>
+            <div class="date">May 2024 - Present</div>
+        </div>
+        <div class="timeline-item">
+            <div class="role">Project Intern</div>
+            <div class="org">Believers Church Medical College Hospital</div>
+            <div class="date">June 2024</div>
+        </div>
     </div>
 
 </div>
 
 <footer>
-    <p>&copy; 2026 Muhammed Ameen P. M. <br><br>
-    <a href="#" class="footer-link">LinkedIn</a>
-    <a href="#" class="footer-link">GitHub</a>
-    <a href="mailto:your-email@example.com" class="footer-link">Email</a>
-    </p>
+    <p>&copy; 2026 Muhammed Ameen P.M. | Built with Code & Curiosity</p>
 </footer>
 
 </body>
