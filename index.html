@@ -1,397 +1,296 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammed Ameen | VLSI & Embedded Portfolio</title>
+    <title>Muhammed Ameen | VLSI & Embedded Engineer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#110720', // The specific purple you asked for
+                        card: '#1a0b2e',
+                        accent: '#ff6600',     // Orange pop
+                        dim: '#a39eb5',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        :root {
-            /* THEME: Deep Space Black, Neon Orange, White */
-            --bg-color: #050505;
-            --card-bg: rgba(20, 20, 20, 0.7); /* Semi-transparent for Glassmorphism */
-            --accent-color: #ff6600; 
-            --text-main: #ffffff;
-            --text-dim: #a0a0a0;
-            --border-color: #333;
-            --glass-border: rgba(255, 255, 255, 0.1);
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(255, 102, 0, 0.08), transparent 25%), 
-                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.05), transparent 25%);
-            color: var(--text-main);
-            margin: 0;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* HEADER & TYPING ANIMATION */
-        header {
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            position: relative;
-        }
-
-        h1 { 
-            font-size: 3.5rem; 
-            margin: 0; 
-            text-transform: uppercase; 
-            letter-spacing: 3px;
-            background: -webkit-linear-gradient(#fff, #888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background-color: #110720;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
         }
         
-        .typewriter {
-            display: inline-block;
-            overflow: hidden; 
-            border-right: .15em solid var(--accent-color); 
-            white-space: nowrap; 
-            margin: 20px auto; 
-            font-size: 1.2rem;
-            color: var(--accent-color);
-            font-family: 'Courier New', Courier, monospace;
-            letter-spacing: .15em;
-            animation: 
-                typing 3.5s steps(40, end),
-                blink-caret .75s step-end infinite;
+        /* Glassmorphism utilities */
+        .glass-card {
+            background: rgba(26, 11, 46, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Typing animation cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+            color: #ff6600;
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
         }
 
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--accent-color) }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-color: #ff6600;
         }
-
-        .header-bio {
-            max-width: 600px;
-            color: var(--text-dim);
-            margin-top: 20px;
-            font-size: 1.1rem;
-        }
-
-        .cta-button {
-            margin-top: 30px;
-            padding: 12px 30px;
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
-
-        .cta-button:hover {
-            background: var(--accent-color);
-            color: #000;
-            box-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-
-        /* GLASSMORPHISM CARDS */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 12px;
-            transition: transform 0.3s, border-color 0.3s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .project-card h3 { margin-top: 0; color: #fff; }
-        .project-card p { color: var(--text-dim); font-size: 0.95rem; flex-grow: 1; }
-
-        .tech-stack {
-            margin-top: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tech-tag {
-            font-size: 0.75rem;
-            padding: 4px 8px;
-            border: 1px solid #444;
-            border-radius: 4px;
-            color: #aaa;
-        }
-
-        .badge-publish {
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            background: var(--accent-color);
-            color: #000;
-            padding: 5px 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            border-radius: 4px;
-            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
-        }
-
-        /* SKILLS SECTION WITH PRESTIGE HIGHLIGHTS */
-        .skills-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .skill-category h4 {
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-        }
-
-        .skill-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .skill-list li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            color: #ddd;
-        }
-
-        .skill-list li i {
-            margin-right: 10px;
-            color: var(--text-dim);
-            font-size: 0.8rem;
-        }
-
-        /* Highlight specific pro tools */
-        .pro-tool {
-            color: #fff !important;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        /* TIMELINE (Simple & Clean) */
-        .timeline {
-            border-left: 2px solid #333;
-            padding-left: 30px;
-            margin-top: 20px;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 40px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -36px;
-            top: 5px;
-            width: 10px;
-            height: 10px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-color);
-        }
-
-        .role { font-size: 1.1rem; font-weight: bold; color: #fff; }
-        .org { color: var(--accent-color); }
-        .date { font-size: 0.85rem; color: #666; font-family: monospace; }
-
-        footer {
-            text-align: center;
-            padding: 50px;
-            color: #555;
-            font-size: 0.9rem;
-        }
-
     </style>
 </head>
-<body>
+<body class="antialiased selection:bg-accent selection:text-white">
 
-<header>
-    <h1>Muhammed Ameen P.M.</h1>
-    <div class="typewriter">DESIGNING CHIPS & SAVING LIVES</div>
-    
-    <p class="header-bio">
-        B.Tech ECE Student @ TKMCE <br>
-        VLSI &bull; Embedded Systems &bull; Healthcare AI
-    </p>
+    <header class="fixed w-full top-0 z-50 glass-card border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-2xl font-bold tracking-tight">
+                M<span class="text-accent">A</span>.
+            </a>
+            <nav class="hidden md:flex gap-8 text-sm font-medium text-dim">
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#experience" class="hover:text-white transition-colors">Experience</a>
+                <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+            </nav>
+            <a href="#projects" class="px-5 py-2 rounded-full border border-accent text-accent text-sm font-semibold hover:bg-accent hover:text-white transition-all">
+                View Work
+            </a>
+        </div>
+    </header>
 
-    <a href="#projects" class="cta-button">View My Work</a>
-</header>
-
-<div class="container" id="projects">
-
-    <h2 class="section-title">Featured Engineering</h2>
-    <div class="project-grid">
+    <main class="pt-32">
         
-        <div class="project-card">
-            <div class="badge-publish">IEEE PUBLISHED</div>
-            <h3>AI-Based Heart Disease Detection</h3>
-            <p>A Deep Learning (DSNN) model to classify heart conditions using ECG & PCG signals with high accuracy.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">TensorFlow</span>
-                <span class="tech-tag">Signal Processing</span>
+        <section id="banner" class="min-h-[80vh] flex flex-col justify-center max-w-6xl mx-auto px-6 relative">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-[128px] -z-10"></div>
+
+            <p class="text-accent font-medium tracking-wide mb-4">HI, I AM MUHAMMED AMEEN</p>
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
+                Designing Chips & <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500 typing-cursor">Saving Lives</span>
+            </h1>
+            <p class="text-dim text-lg max-w-2xl leading-relaxed mb-10">
+                B.Tech ECE Student at <strong class="text-white">TKM College of Engineering</strong>. 
+                Bridging the gap between <span class="text-white">VLSI Architecture</span> and <span class="text-white">Healthcare AI</span> 
+                to build intelligent embedded systems.
+            </p>
+            
+            <div class="flex gap-4">
+                <a href="#projects" class="px-8 py-4 bg-accent text-white font-bold rounded-lg shadow-lg shadow-accent/20 hover:shadow-accent/40 transition-all">
+                    Latest Projects
+                </a>
+                <a href="https://github.com" target="_blank" class="px-8 py-4 glass-card text-white font-medium rounded-lg hover:bg-white/5 transition-all flex items-center gap-2">
+                    <i class="fab fa-github text-xl"></i> GitHub
+                </a>
             </div>
-        </div>
 
-        <div class="project-card">
-            <h3>ApneaSense</h3>
-            <p>Developed during <strong>BCMCH Internship</strong>. A sleep apnea monitoring system for clinical healthcare applications.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">Medical IoT</span>
-                <span class="tech-tag">Sensors</span>
-                <span class="tech-tag">Clinical Tech</span>
+            <div class="mt-20 flex flex-wrap gap-8 text-dim/50 font-semibold text-xl items-center">
+                <span class="hover:text-accent transition-colors"><i class="fas fa-microchip"></i> Cadence</span>
+                <span class="hover:text-accent transition-colors"><i class="fas fa-layer-group"></i> Vivado</span>
+                <span class="hover:text-accent transition-colors"><i class="fas fa-memory"></i> STM32</span>
+                <span class="hover:text-accent transition-colors"><i class="fab fa-figma"></i> Figma</span>
+                <span class="hover:text-accent transition-colors"><i class="fab fa-python"></i> TensorFlow</span>
             </div>
-        </div>
+        </section>
 
-        <div class="project-card">
-            <h3>ToxGuard</h3>
-            <p>Wearable industrial safety system. Uses ESP32 to detect gas leaks and streams data to a Flask dashboard.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">IoT / ESP32</span>
-                <span class="tech-tag">Flask</span>
-                <span class="tech-tag">Figma UI</span>
+        <section id="experience" class="py-20 max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+                <span class="w-12 h-1 bg-accent rounded-full"></span> Experience
+            </h2>
+            
+            <div class="space-y-8">
+                <div class="glass-card p-8 rounded-2xl hover-lift relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold">Vice Chair</h3>
+                        <span class="text-sm font-mono text-dim">Jan 2024 - Present</span>
+                    </div>
+                    <p class="text-accent font-medium mb-4">IEEE CAS SB TKMCE</p>
+                    <p class="text-dim">Leading technical initiatives in circuits and systems. Organizing workshops on FPGA prototyping and Analog Design.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl hover-lift relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold">Project Intern (Embedded Systems)</h3>
+                        <span class="text-sm font-mono text-dim">June 2024</span>
+                    </div>
+                    <p class="text-accent font-medium mb-4">Believers Church Medical College Hospital</p>
+                    <p class="text-dim">Developed <strong>ApneaSense</strong>, a clinical-grade sleep apnea monitoring system. Bridged engineering logic with medical requirements.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl hover-lift relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold">Design Head</h3>
+                        <span class="text-sm font-mono text-dim">May 2024 - Present</span>
+                    </div>
+                    <p class="text-accent font-medium mb-4">Mathventures TKMCE</p>
+                    <p class="text-dim">Leading the creative team. Designing branding assets and event UI using Adobe Photoshop and Figma.</p>
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <h2 class="section-title" style="margin-top: 80px;">Core Projects</h2>
-    <div class="project-grid">
-        <div class="project-card">
-            <h3>Password Circuit Breaker</h3>
-            <p>Security system using <strong>8051 Microcontroller</strong>. Features EEPROM password storage and custom PCB.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">8051 Assembly/C</span>
-                <span class="tech-tag">PCB Design</span>
+        <section id="projects" class="py-20 max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+                <span class="w-12 h-1 bg-accent rounded-full"></span> Featured Work
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <article class="glass-card rounded-2xl overflow-hidden hover-lift flex flex-col h-full border-t-4 border-t-accent">
+                    <div class="p-8 flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <i class="fas fa-heartbeat text-4xl text-dim"></i>
+                            <span class="bg-green-500/20 text-green-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Published</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">AI Heart Disease Detection</h3>
+                        <p class="text-dim text-sm mb-6">IEEE Xplore accepted research using Deep Learning (DSNN) to classify heart conditions via ECG & PCG signals.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white/5 rounded text-xs text-dim">Python</span>
+                            <span class="px-3 py-1 bg-white/5 rounded text-xs text-dim">TensorFlow</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="glass-card rounded-2xl overflow-hidden hover-lift flex flex-col h-full">
+                    <div class="p-8 flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <i class="fas fa-mask text-4xl text-dim"></i>
+                            <span class="bg-accent/20 text-accent text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">IoT / Hardware</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">ToxGuard</h3>
+                        <p class="text-dim text-sm mb-6">Wearable industrial safety system. Uses ESP32 to detect gas leaks and streams real-time data to a Flask dashboard.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white/5 rounded text-xs text-dim">ESP32</span>
+                            <span class="px-3 py-1 bg-white/5 rounded text-xs text-dim">Figma UI</span>
+                            <span class="px-3 py-1 bg-white/5 rounded text-xs text-dim">Flask</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="glass-card rounded-2xl overflow-hidden hover-lift flex flex-col h-full">
+                    <div class="p-8 flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <i class="fas fa-microchip text-4xl text-dim"></i>
+                            <span class="bg-blue-500/20 text-blue-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Embedded</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Password Circuit Breaker</h3>
+                        <p class="text-dim text-sm mb-6">Hardware security system using 8051 Microcontroller with EEPROM storage and a custom-designed PCB.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white/5 rounded text-xs text-dim">8051</span>
+                            <span class="px-3 py-1 bg-white/5 rounded text-xs text-dim">PCB Design</span>
+                            <span class="px-3 py-1 bg-white/5 rounded text-xs text-dim">Assembly</span>
+                        </div>
+                    </div>
+                </article>
+
             </div>
-        </div>
+        </section>
 
-        <div class="project-card">
-            <h3>Digital Visitor Counter</h3>
-            <p>Automated room capacity monitoring using IR sensors and 4026 IC decade counters.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">Digital Logic</span>
-                <span class="tech-tag">4026 IC</span>
+        <section id="about" class="py-20 bg-black/20">
+            <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">Technical Arsenal</h2>
+                    <p class="text-dim mb-8">
+                        My expertise lies in the intersection of hardware design and software intelligence. 
+                        I don't just write code; I design the systems it runs on.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-white font-semibold mb-4 border-b border-accent/30 pb-2 inline-block">VLSI & Hardware</h4>
+                            <ul class="space-y-2 text-dim text-sm">
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-accent"></i> Cadence Virtuoso</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-accent"></i> Xilinx Vivado</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-accent"></i> STM32 / ARM</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-accent"></i> FPGA Prototyping</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-semibold mb-4 border-b border-accent/30 pb-2 inline-block">Software & Design</h4>
+                            <ul class="space-y-2 text-dim text-sm">
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-accent"></i> Python (TensorFlow)</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-accent"></i> Embedded C</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-accent"></i> Figma (UI/UX)</li>
+                                <li class="flex items-center gap-2"><i class="fas fa-check text-accent"></i> Adobe Photoshop</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-8 rounded-2xl">
+                    <h3 class="text-xl font-bold mb-4">About Me</h3>
+                    <p class="text-dim mb-4">
+                        I am currently pursuing my B.Tech in Electronics and Communication Engineering at 
+                        <span class="text-white font-medium">TKM College of Engineering</span>.
+                    </p>
+                    <p class="text-dim mb-4">
+                        My journey involves deep-diving into **Digital Signal Processing** and **SoC Architecture**, 
+                        while simultaneously leading design teams for student chapters. I aim to create technology 
+                        that is not only efficient but also saves lives.
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-white/10 flex gap-6">
+                        <div class="text-center">
+                            <span class="block text-2xl font-bold text-white">3+</span>
+                            <span class="text-xs text-dim uppercase">Major Projects</span>
+                        </div>
+                        <div class="text-center">
+                            <span class="block text-2xl font-bold text-white">1</span>
+                            <span class="text-xs text-dim uppercase">Research Paper</span>
+                        </div>
+                        <div class="text-center">
+                            <span class="block text-2xl font-bold text-white">98%</span>
+                            <span class="text-xs text-dim uppercase">HS Score</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="project-card">
-            <h3>Sun Tracking Solar Panel</h3>
-            <p>Dual-axis tracker using Arduino Uno and LDRs. Increased energy efficiency significantly over static panels.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">Arduino</span>
-                <span class="tech-tag">Servo Motors</span>
-                <span class="tech-tag">C++</span>
-            </div>
-        </div>
-    </div>
+    </main>
 
-    <h2 class="section-title" style="margin-top: 80px;">Technical Arsenal</h2>
-    <div class="skills-section">
-        
-        <div class="skill-category">
-            <h4>VLSI & Hardware</h4>
-            <ul class="skill-list">
-                <li class="pro-tool"><i class="fas fa-microchip"></i> STM32 Microcontrollers</li>
-                <li class="pro-tool"><i class="fas fa-microchip"></i> Cadence Virtuoso</li>
-                <li class="pro-tool"><i class="fas fa-layer-group"></i> Xilinx Vivado</li>
-                <li><i class="fas fa-memory"></i> FPGA Prototyping</li>
-                <li><i class="fas fa-wave-square"></i> PCB Design</li>
-            </ul>
+    <footer id="contact" class="py-12 border-t border-white/5 text-center">
+        <h2 class="text-2xl font-bold mb-6">Let's Build Something Amazing</h2>
+        <div class="flex justify-center gap-8 mb-8">
+            <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-accent hover:text-white transition-all">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-accent hover:text-white transition-all">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:ameen@example.com" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-accent hover:text-white transition-all">
+                <i class="fas fa-envelope"></i>
+            </a>
         </div>
-
-        <div class="skill-category">
-            <h4>Software & AI</h4>
-            <ul class="skill-list">
-                <li><i class="fab fa-python"></i> Python (TensorFlow)</li>
-                <li><i class="fas fa-code"></i> Embedded C</li>
-                <li><i class="fab fa-java"></i> Java</li>
-                <li><i class="fas fa-database"></i> MATLAB</li>
-            </ul>
-        </div>
-
-        <div class="skill-category">
-            <h4>Design & Prototyping</h4>
-            <ul class="skill-list">
-                <li class="pro-tool"><i class="fab fa-figma"></i> Figma</li>
-                <li><i class="fas fa-pen-nib"></i> Adobe Photoshop</li>
-                <li><i class="fas fa-drafting-compass"></i> AutoCAD</li>
-            </ul>
-        </div>
-
-    </div>
-
-    <h2 class="section-title" style="margin-top: 80px;">Experience</h2>
-    <div class="timeline">
-        <div class="timeline-item">
-            <div class="role">Vice Chair</div>
-            <div class="org">IEEE CAS SB TKMCE</div>
-            <div class="date">Jan 2024 - Present</div>
-        </div>
-        <div class="timeline-item">
-            <div class="role">Design Head</div>
-            <div class="org">Mathventures TKMCE</div>
-            <div class="date">May 2024 - Present</div>
-        </div>
-        <div class="timeline-item">
-            <div class="role">Project Intern (Embedded Systems)</div>
-            <div class="org">Believers Church Medical College Hospital</div>
-            <div class="date">June 2024</div>
-        </div>
-    </div>
-
-</div>
-
-<footer>
-    <p>&copy; 2026 Muhammed Ameen P.M. | Built with Code & Curiosity</p>
-</footer>
+        <p class="text-dim text-sm">&copy; 2026 Muhammed Ameen P. M. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
