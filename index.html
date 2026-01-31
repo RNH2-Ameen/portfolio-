@@ -7,13 +7,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --accent-color: #58a6ff;
-            --secondary-color: #238636; /* Green for "Published" status */
-            --text-main: #c9d1d9;
-            --text-dim: #8b949e;
-            --border-color: #30363d;
+            /* THEME: Black, White, Orange */
+            --bg-color: #000000;
+            --card-bg: #111111;
+            --accent-color: #ff6600; /* Vibrant Orange */
+            --text-main: #ffffff;
+            --text-dim: #cccccc;
+            --border-color: #333333;
         }
 
         body {
@@ -28,12 +28,26 @@
         header {
             padding: 80px 20px;
             text-align: center;
-            border-bottom: 1px solid var(--border-color);
-            background: radial-gradient(circle at top, #1e252e 0%, #0d1117 100%);
+            border-bottom: 2px solid var(--border-color);
+            /* Subtle radial gradient for depth, keeping it mostly black */
+            background: radial-gradient(circle at top, #1a1a1a 0%, #000000 100%);
         }
 
-        h1 { font-size: 2.8rem; color: #fff; margin-bottom: 10px; }
-        .subtitle { color: var(--accent-color); font-weight: bold; font-size: 1.2rem; }
+        h1 { 
+            font-size: 2.8rem; 
+            color: #fff; 
+            margin-bottom: 10px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+        }
+        
+        .subtitle { 
+            color: var(--accent-color); 
+            font-weight: bold; 
+            font-size: 1.2rem; 
+            letter-spacing: 1px;
+        }
+        
         .contact-info { margin-top: 20px; color: var(--text-dim); font-size: 0.9rem; }
         
         .container {
@@ -43,112 +57,150 @@
         }
 
         .section-title {
-            border-left: 4px solid var(--accent-color);
-            padding-left: 15px;
-            margin: 50px 0 30px 0;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 20px;
+            margin: 60px 0 30px 0;
             color: #fff;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            text-transform: uppercase;
+            font-weight: 800;
         }
 
         /* Projects Grid */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
 
         .project-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 4px; /* Sharper corners for industrial look */
             padding: 25px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.2s ease, border-color 0.2s ease;
             position: relative;
         }
 
         .project-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent-color);
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.1);
         }
 
         .badge {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(35, 134, 54, 0.2);
-            color: #3fb950;
-            padding: 4px 8px;
-            border-radius: 12px;
+            background: var(--accent-color);
+            color: #000;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 2px;
             font-size: 0.75rem;
-            border: 1px solid rgba(35, 134, 54, 0.4);
+            text-transform: uppercase;
         }
 
         .project-tag {
-            background: rgba(88, 166, 255, 0.1);
-            color: var(--accent-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-dim);
             padding: 4px 10px;
-            border-radius: 4px;
+            border-radius: 2px;
             font-size: 0.8rem;
             margin-right: 5px;
             display: inline-block;
-            margin-top: 5px;
+            margin-top: 10px;
+        }
+        
+        .project-card:hover .project-tag {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
         }
 
         /* Timeline / Experience Section */
         .timeline-item {
             border-left: 2px solid var(--border-color);
-            padding-left: 20px;
-            margin-bottom: 30px;
+            padding-left: 25px;
+            margin-bottom: 40px;
             position: relative;
         }
 
         .timeline-item::before {
             content: '';
-            width: 12px;
-            height: 12px;
-            background: var(--accent-color);
+            width: 10px;
+            height: 10px;
+            background: var(--bg-color); /* Hollow circle look */
+            border: 2px solid var(--accent-color);
             border-radius: 50%;
             position: absolute;
-            left: -7px;
-            top: 5px;
+            left: -8px;
+            top: 6px;
         }
 
-        .role-title { color: #fff; font-size: 1.1rem; font-weight: bold; margin: 0; }
-        .company-name { color: var(--accent-color); font-size: 0.95rem; }
-        .date-range { color: var(--text-dim); font-size: 0.85rem; font-style: italic; margin-bottom: 8px; display: block;}
+        .role-title { color: #fff; font-size: 1.2rem; font-weight: bold; margin: 0; }
+        .company-name { color: var(--accent-color); font-size: 1rem; font-weight: 600; }
+        .date-range { color: var(--text-dim); font-size: 0.85rem; font-family: monospace; display: block; margin-top: 5px;}
 
-        /* Skills & Certs */
+        /* Skills */
         .skills-container {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
         }
         
-        .skill-group h4 { margin: 10px 0 5px 0; color: var(--text-dim); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;}
+        .skill-group h4 { margin: 10px 0 5px 0; color: var(--accent-color); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;}
 
         .skill-pill {
+            background: #1a1a1a;
             border: 1px solid var(--border-color);
-            padding: 6px 14px;
-            border-radius: 20px;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 0px; /* Square edges for tech feel */
             font-size: 0.9rem;
-            background: rgba(255,255,255,0.03);
+            transition: 0.2s;
+        }
+        
+        .skill-pill:hover {
+            border-color: var(--accent-color);
+            background: #000;
         }
 
         footer {
             text-align: center;
-            padding: 50px 20px;
+            padding: 60px 20px;
             color: var(--text-dim);
             font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
-            margin-top: 50px;
+            border-top: 2px solid var(--border-color);
+            margin-top: 60px;
+            background: #050505;
         }
 
         a.btn {
             display: inline-block;
-            margin-top: 15px;
-            color: var(--accent-color);
+            margin-top: 20px;
+            color: #000;
+            background: var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 2px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        
+        a.btn:hover {
+            background: #fff;
+        }
+        
+        a.footer-link {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.2s;
+        }
+        
+        a.footer-link:hover {
+            color: var(--accent-color);
         }
     </style>
 </head>
@@ -157,12 +209,12 @@
 <header>
     <h1>Muhammed Ameen P. M.</h1>
     <p class="subtitle">B.Tech ECE | Researcher | Designer</p>
-    <p style="max-width: 600px; margin: 10px auto; padding: 0 20px;">
+    <p style="max-width: 600px; margin: 15px auto; padding: 0 20px; color: #ccc;">
         Engineering student bridging the gap between <strong>Embedded Systems</strong>, <strong>VLSI</strong>, and <strong>Healthcare AI</strong>.
     </p>
     <div class="contact-info">
-        <i class="fas fa-map-marker-alt"></i> Kollam, Kerala &bull; 
-        <i class="fas fa-university"></i> TKM College of Engineering (2023-2027)
+        <i class="fas fa-map-marker-alt" style="color:var(--accent-color)"></i> Kollam, Kerala &nbsp;|&nbsp; 
+        <i class="fas fa-university" style="color:var(--accent-color)"></i> TKM College of Engineering
     </div>
 </header>
 
@@ -170,8 +222,8 @@
     
     <h2 class="section-title">Research & Projects</h2>
     <div class="project-grid">
-        <div class="project-card" style="border-color: var(--secondary-color);">
-            <div class="badge">IEEE Xplore Accepted</div>
+        <div class="project-card" style="border-color: var(--accent-color);">
+            <div class="badge">IEEE Published</div>
             <h3>AI-Based Heart Disease Detection</h3>
             <p>Research presented at <strong>ICAACT</strong> using Deep Learning (DSNN) to classify heart conditions via ECG & PCG signals.</p>
             <div>
@@ -184,7 +236,7 @@
 
         <div class="project-card">
             <h3>Smart Wearable Safety Guardian</h3>
-            <p><strong>"ToxGuard"</strong>: An industrial safety device for workers using ESP32 sensors and a Flask dashboard for real-time monitoring.</p>
+            <p><strong>"ToxGuard"</strong>: An industrial safety device for workers using ESP32 sensors and a Flask dashboard.</p>
             <div>
                 <span class="project-tag">IoT / Embedded</span>
                 <span class="project-tag">Flask</span>
@@ -237,26 +289,35 @@
 
     <h2 class="section-title">Technical Skills & Certifications</h2>
     <div class="skills-container">
-        <div class="skill-group">
-            <span class="skill-pill">VLSI / RTL</span>
-            <span class="skill-pill">FPGA Prototyping</span>
-            <span class="skill-pill">Arduino / ESP32</span>
-            <span class="skill-pill">Analog Circuit Design</span>
+        <div class="skill-group" style="flex: 1; min-width: 250px;">
+            <h4>Hardware & VLSI</h4>
+            <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                <span class="skill-pill">VLSI / RTL</span>
+                <span class="skill-pill">FPGA Prototyping</span>
+                <span class="skill-pill">Arduino / ESP32</span>
+                <span class="skill-pill">Analog Circuit Design</span>
+            </div>
         </div>
-        <div class="skill-group">
-            <span class="skill-pill">Python (TensorFlow/Keras)</span>
-            <span class="skill-pill">Java (NPTEL Certified)</span>
-            <span class="skill-pill">C Programming</span>
+        <div class="skill-group" style="flex: 1; min-width: 250px;">
+            <h4>Software</h4>
+            <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                <span class="skill-pill">Python (TensorFlow)</span>
+                <span class="skill-pill">Java (NPTEL Certified)</span>
+                <span class="skill-pill">C Programming</span>
+            </div>
         </div>
-        <div class="skill-group">
-            <span class="skill-pill">Adobe Photoshop</span>
-            <span class="skill-pill">Graphic Design</span>
-            <span class="skill-pill">AutoCAD</span>
+        <div class="skill-group" style="flex: 1; min-width: 250px;">
+            <h4>Design</h4>
+            <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                <span class="skill-pill">Adobe Photoshop</span>
+                <span class="skill-pill">Graphic Design</span>
+                <span class="skill-pill">AutoCAD</span>
+            </div>
         </div>
     </div>
     
-    <div style="margin-top: 30px;">
-        <h4 style="color:var(--text-dim); text-transform:uppercase; font-size: 0.9rem;">Education</h4>
+    <div style="margin-top: 40px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+        <h4 style="color:var(--text-dim); text-transform:uppercase; font-size: 0.9rem; margin-bottom: 10px;">Education</h4>
         <p><strong>TKM College of Engineering</strong> - B.Tech ECE (2023-2027)<br>
         <span style="color:var(--text-dim); font-size:0.9rem;">St. Joseph's HSS Kodenchery (98.4%)</span></p>
     </div>
@@ -264,10 +325,10 @@
 </div>
 
 <footer>
-    <p>&copy; 2026 Muhammed Ameen P. M. <br>
-    <a href="#" style="color:var(--accent-color); text-decoration:none;">LinkedIn</a> &bull; 
-    <a href="#" style="color:var(--accent-color); text-decoration:none;">GitHub</a> &bull; 
-    <a href="mailto:your-email@example.com" style="color:var(--accent-color); text-decoration:none;">Email</a>
+    <p>&copy; 2026 Muhammed Ameen P. M. <br><br>
+    <a href="#" class="footer-link">LinkedIn</a>
+    <a href="#" class="footer-link">GitHub</a>
+    <a href="mailto:your-email@example.com" class="footer-link">Email</a>
     </p>
 </footer>
 
