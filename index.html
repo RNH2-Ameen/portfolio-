@@ -137,15 +137,16 @@
 <body class="antialiased selection:bg-accent selection:text-white pb-20">
 
     <div class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
-        <nav class="nav-island rounded-full px-6 py-3 flex items-center gap-8 transition-all hover:scale-[1.01]">
+        <nav class="nav-island rounded-full px-6 py-3 flex items-center gap-6 md:gap-8 transition-all hover:scale-[1.01]">
             <a href="#" class="text-lg font-bold tracking-tight text-white hover:text-accent transition-colors">Ameen.</a>
-            <div class="hidden md:flex gap-6 text-sm font-medium text-textDim">
+            <div class="hidden lg:flex gap-6 text-sm font-medium text-textDim">
                 <a href="#experience" class="hover:text-white transition-colors">Experience</a>
                 <a href="#skills" class="hover:text-white transition-colors">Skills</a>
                 <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+                <a href="#publications" class="hover:text-white transition-colors">Publications</a>
                 <a href="#education" class="hover:text-white transition-colors">Education</a>
             </div>
-            <a href="#projects" class="btn-ios-primary px-4 py-1.5 rounded-full text-sm">
+            <a href="#publications" class="btn-ios-primary px-4 py-1.5 rounded-full text-sm">
                 My Work
             </a>
         </nav>
@@ -320,7 +321,7 @@
                         <span class="text-[10px] font-bold uppercase tracking-wider text-green-400 bg-green-500/10 px-3 py-1 rounded-full">IEEE Xplore</span>
                     </div>
                     <h3 class="text-xl font-bold mb-2">AI Cardiac Abnormality Detection</h3>
-                    <p class="text-textDim text-sm mb-6 flex-grow">Published diagnostic framework combining a hardware PCG acquisition module with a cloud-based Siamese Neural Network. Presented at IEEE ICAECT 2026.</p>
+                    <p class="text-textDim text-sm mb-6 flex-grow">Diagnostic framework combining a hardware PCG acquisition module with a cloud-based Siamese Neural Network. Presented at IEEE ICAECT 2026.</p>
                     <div class="flex gap-2 text-xs font-medium text-white/60"><span class="bg-white/10 px-2 py-1 rounded">PCG Signals</span><span class="bg-white/10 px-2 py-1 rounded">SNN</span></div>
                 </div>
 
@@ -387,6 +388,44 @@
                     <h3 class="text-xl font-bold mb-2">Sun Tracking Solar Panel</h3>
                     <p class="text-textDim text-sm mb-6 flex-grow">Dual-axis tracker using Arduino Uno and LDRs for max efficiency.</p>
                     <div class="flex gap-2 text-xs font-medium text-white/60"><span class="bg-white/10 px-2 py-1 rounded">Arduino</span><span class="bg-white/10 px-2 py-1 rounded">Servo</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications" class="mb-32">
+            <h2 class="text-3xl font-bold mb-10 text-white pl-2 border-l-4 border-accent">Publications</h2>
+            
+            <div class="glass-panel hover-scale p-8 md:p-10 rounded-[32px] relative overflow-hidden group border border-accent/40">
+                <div class="absolute -top-24 -right-24 w-64 h-64 bg-accent/20 rounded-full blur-3xl group-hover:bg-accent/30 transition-all duration-500 pointer-events-none"></div>
+                
+                <div class="flex flex-col md:flex-row gap-8 items-start relative z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-accent flex items-center justify-center text-white text-2xl shrink-0 shadow-lg shadow-accent/20">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    
+                    <div class="flex-grow">
+                        <div class="flex flex-wrap gap-3 items-center mb-4">
+                            <span class="text-[10px] font-bold tracking-wider text-white bg-accent px-3 py-1 rounded-full shadow-md shadow-accent/30">RECENTLY PUBLISHED</span>
+                            <span class="text-[10px] font-bold tracking-wider text-accent border border-accent/30 bg-accent/10 px-3 py-1 rounded-full">IEEE Xplore</span>
+                        </div>
+                        
+                        <h3 class="text-2xl md:text-3xl font-bold mb-3 text-white leading-tight">Artificial Intelligence Based Hardware Design for Efficient Detection of Cardiac Abnormalities</h3>
+                        
+                        <p class="text-md text-white/80 font-medium mb-4">Presented at the 2026 Sixth International Conference on Advances in Electrical, Computing, Communication and Sustainable Technologies (ICAECT)</p>
+                        
+                        <p class="text-textDim mb-6 leading-relaxed max-w-4xl text-sm md:text-base">
+                            Published a diagnostic framework for cardiovascular disease that integrates a cloud-based Siamese Neural Network for real-time classification with a hardware-based phonocardiogram (PCG) acquisition module to extract and process essential heartbeats.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-6 sm:items-center">
+                            <a href="#" class="btn-ios-primary px-6 py-3 rounded-full inline-flex items-center justify-center gap-2 text-sm shrink-0">
+                                <i class="fas fa-external-link-alt"></i> View on IEEE Xplore
+                            </a>
+                            <p class="text-xs text-textDim italic leading-relaxed">
+                                Authors: P. Lubaib, J. Dhoulath Beegum, Prakeerth Jisha Madhu Prakash, Muhammed Ameen PM, Rinshad PPK
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
