@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
     <script>
@@ -18,7 +17,7 @@
             theme: {
                 extend: {
                     colors: {
-                        accent: '#0A84FF', // iOS System Blue
+                        accent: '#0A84FF',
                         textDim: 'rgba(255, 255, 255, 0.65)',
                     },
                     fontFamily: {
@@ -30,12 +29,10 @@
     </script>
 
     <style>
-        /* --- iOS BASE SETTINGS --- */
         body {
             background-color: #000;
             color: #ffffff;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            /* Deep iOS Mesh Gradient - The "Wallpaper" */
             background-image: 
                 radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
                 radial-gradient(at 50% 10%, hsla(225,39%,25%,1) 0, transparent 50%), 
@@ -45,7 +42,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- THE GLASS MATERIAL --- */
         .glass-panel {
             background: rgba(30, 30, 30, 0.3);
             backdrop-filter: blur(25px);
@@ -56,7 +52,6 @@
             overflow: hidden;
         }
 
-        /* --- THE DYNAMIC ISLAND (Navigation) --- */
         .nav-island {
             background: rgba(15, 15, 15, 0.7);
             backdrop-filter: blur(30px);
@@ -65,7 +60,6 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.5);
         }
 
-        /* --- iOS BUTTON STYLES --- */
         .btn-ios-primary {
             background: #ffffff;
             color: #000000;
@@ -90,7 +84,6 @@
             transform: translateY(-2px);
         }
 
-        /* --- INTERACTIVE CARDS --- */
         .hover-scale {
             transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
                         background 0.4s ease, 
@@ -104,7 +97,6 @@
             z-index: 10;
         }
 
-        /* Shine Effect overlay for Cards */
         .glass-panel::after {
             content: '';
             position: absolute;
@@ -122,7 +114,6 @@
             transition: 0.7s;
         }
 
-        /* --- UTILITIES --- */
         .text-gradient {
             background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
             -webkit-background-clip: text;
@@ -132,14 +123,39 @@
         .progress-fill {
             background: linear-gradient(90deg, #0A84FF, #5E5CE6);
         }
+
+        /* Achievement badge pulse */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 8px rgba(10, 132, 255, 0.4); }
+            50% { box-shadow: 0 0 20px rgba(10, 132, 255, 0.8), 0 0 40px rgba(10, 132, 255, 0.3); }
+        }
+        .badge-live {
+            animation: pulse-glow 2.5s ease-in-out infinite;
+        }
+
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fade-in-up 0.6s ease forwards;
+        }
+
+        /* Achievement ticker */
+        .achievement-ticker {
+            background: linear-gradient(90deg, rgba(10,132,255,0.15), rgba(94,92,230,0.15));
+            border: 1px solid rgba(10,132,255,0.3);
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-accent selection:text-white pb-20">
 
+    <!-- NAV -->
     <div class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
         <nav class="nav-island rounded-full px-6 py-3 flex items-center gap-6 md:gap-8 transition-all hover:scale-[1.01]">
             <a href="#" class="text-lg font-bold tracking-tight text-white hover:text-accent transition-colors">Ameen.</a>
             <div class="hidden lg:flex gap-6 text-sm font-medium text-textDim">
+                <a href="#achievements" class="hover:text-white transition-colors">Achievements</a>
                 <a href="#experience" class="hover:text-white transition-colors">Experience</a>
                 <a href="#publications" class="hover:text-white transition-colors">Publications</a>
                 <a href="#skills" class="hover:text-white transition-colors">Skills</a>
@@ -153,8 +169,9 @@
     </div>
 
     <main class="pt-40 container mx-auto px-6 max-w-7xl">
-        
-        <section class="text-center mb-32 relative">
+
+        <!-- HERO -->
+        <section class="text-center mb-20 relative">
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
 
             <div class="inline-block px-4 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-sm font-medium text-accent mb-6 animate-fade-in-up">
@@ -169,6 +186,17 @@
                 B.Tech ECE Student at <strong>TKM College of Engineering</strong>. <br>
                 Designing Chips. Saving Lives.
             </p>
+
+            <!-- Recent achievements ticker -->
+            <div class="flex justify-center mb-10">
+                <div class="achievement-ticker rounded-2xl px-6 py-3 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm max-w-3xl">
+                    <span class="text-white/70">🏆 <span class="text-white font-semibold">3rd Prize</span> — VEGATHON National Hackathon</span>
+                    <span class="text-white/30">·</span>
+                    <span class="text-white/70">📄 <span class="text-white font-semibold">Published</span> on IEEE Xplore (ICAECT 2026)</span>
+                    <span class="text-white/30">·</span>
+                    <span class="text-white/70">⚡ <span class="text-white font-semibold">Chairperson</span>, IEEE CAS SB TKMCE</span>
+                </div>
+            </div>
             
             <div class="flex justify-center gap-4 flex-wrap">
                 <a href="https://github.com/RNH2-Ameen" target="_blank" class="glass-panel btn-ios-glass px-8 py-4 rounded-full flex items-center gap-3">
@@ -180,9 +208,95 @@
                 <a href="mailto:ameenpmnh3@gmail.com" class="glass-panel btn-ios-glass px-8 py-4 rounded-full flex items-center gap-3">
                     <i class="fas fa-envelope text-xl"></i> Email
                 </a>
+                <a href="https://portfolio-ashen-gamma-45.vercel.app/" target="_blank" class="glass-panel btn-ios-glass px-8 py-4 rounded-full flex items-center gap-3">
+                    <i class="fas fa-globe text-xl"></i> Portfolio
+                </a>
             </div>
         </section>
 
+        <!-- RECENT ACHIEVEMENTS SECTION -->
+        <section id="achievements" class="mb-32">
+            <h2 class="text-3xl font-bold mb-10 text-white pl-2 border-l-4 border-accent">Recent Achievements</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- IEEE Publication -->
+                <div class="glass-panel hover-scale p-8 rounded-[32px] relative overflow-hidden border border-accent/40 md:col-span-2">
+                    <div class="absolute -top-16 -right-16 w-48 h-48 bg-accent/20 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-accent flex items-center justify-center text-white text-xl shrink-0 shadow-lg shadow-accent/30">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-2 mb-1">
+                                <span class="text-[10px] font-bold tracking-wider text-white bg-accent px-3 py-1 rounded-full badge-live">PUBLISHED 2026</span>
+                                <span class="text-[10px] font-bold tracking-wider text-accent border border-accent/30 bg-accent/10 px-3 py-1 rounded-full">IEEE Xplore</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white leading-snug">AI-Based Hardware Design for Cardiac Abnormality Detection</h3>
+                        </div>
+                    </div>
+                    <p class="text-sm text-textDim mb-4 leading-relaxed">Presented at ICAECT 2026. A diagnostic framework integrating a hardware PCG acquisition module with a cloud-based Siamese Neural Network for real-time cardiac classification.</p>
+                    <a href="https://ieeexplore.ieee.org/document/11426061" target="_blank" class="btn-ios-primary px-5 py-2.5 rounded-full inline-flex items-center gap-2 text-sm">
+                        <i class="fas fa-external-link-alt text-xs"></i> View on IEEE Xplore
+                    </a>
+                </div>
+
+                <!-- VEGATHON Win -->
+                <div class="glass-panel hover-scale p-8 rounded-[32px] relative overflow-hidden border border-yellow-500/30">
+                    <div class="absolute -top-12 -right-12 w-40 h-40 bg-yellow-500/15 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="w-12 h-12 rounded-2xl bg-yellow-500/20 flex items-center justify-center text-yellow-400 text-xl mb-4">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <span class="text-[10px] font-bold tracking-wider text-yellow-400 bg-yellow-500/10 border border-yellow-500/30 px-3 py-1 rounded-full">MAR 2026</span>
+                    <h3 class="text-xl font-bold mt-3 mb-2">3rd Prize — VEGATHON</h3>
+                    <p class="text-sm text-textDim leading-relaxed">National Hardware Hackathon (CARBON X). Autonomous Agricultural Rover on VEGA RISC-V processor with custom Verilog modules for real-time sensor processing.</p>
+                    <div class="flex gap-2 mt-4 flex-wrap">
+                        <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/60">RISC-V</span>
+                        <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/60">Verilog</span>
+                        <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/60">Robotics</span>
+                    </div>
+                </div>
+
+                <!-- Chairperson -->
+                <div class="glass-panel hover-scale p-8 rounded-[32px] relative overflow-hidden border border-purple-500/30">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/20 flex items-center justify-center text-purple-400 text-xl mb-4">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <span class="text-[10px] font-bold tracking-wider text-purple-400 bg-purple-500/10 border border-purple-500/30 px-3 py-1 rounded-full">FEB 2026 – PRESENT</span>
+                    <h3 class="text-xl font-bold mt-3 mb-2">Chairperson, IEEE CAS SB</h3>
+                    <p class="text-sm text-textDim leading-relaxed">Leading IEEE Circuits and Systems Society Student Branch at TKMCE. Technical initiatives in analog/digital IC design and FPGA prototyping workshops.</p>
+                </div>
+
+                <!-- Manuscript submitted -->
+                <div class="glass-panel hover-scale p-8 rounded-[32px] relative overflow-hidden border border-teal-500/30">
+                    <div class="w-12 h-12 rounded-2xl bg-teal-500/20 flex items-center justify-center text-teal-400 text-xl mb-4">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <span class="text-[10px] font-bold tracking-wider text-teal-400 bg-teal-500/10 border border-teal-500/30 px-3 py-1 rounded-full">MANUSCRIPT SUBMITTED</span>
+                    <h3 class="text-xl font-bold mt-3 mb-2">Pipelined ECG–PCG Classifier</h3>
+                    <p class="text-sm text-textDim leading-relaxed">8-stage pipelined Twin Neural Network hardware accelerator. Validated using Cadence RTL-to-GDSII flow. Research paper currently under review.</p>
+                    <div class="flex gap-2 mt-4 flex-wrap">
+                        <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/60">VLSI</span>
+                        <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/60">Cadence</span>
+                    </div>
+                </div>
+
+                <!-- Robocon -->
+                <div class="glass-panel hover-scale p-8 rounded-[32px] relative overflow-hidden border border-orange-500/30">
+                    <div class="w-12 h-12 rounded-2xl bg-orange-500/20 flex items-center justify-center text-orange-400 text-xl mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <span class="text-[10px] font-bold tracking-wider text-orange-400 bg-orange-500/10 border border-orange-500/30 px-3 py-1 rounded-full">ROBOCON '26</span>
+                    <h3 class="text-xl font-bold mt-3 mb-2">Smart Wearable Health Guardian</h3>
+                    <p class="text-sm text-textDim leading-relaxed">ESP32 IoT wearable with real-time web monitoring, edge-level risk scoring, and predictive safety analysis. Showcased at Robocon 2026.</p>
+                    <div class="flex gap-2 mt-4 flex-wrap">
+                        <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/60">ESP32</span>
+                        <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/60">IoT</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE -->
         <section id="experience" class="mb-32">
             <h2 class="text-3xl font-bold mb-10 text-white pl-2 border-l-4 border-accent">Experience</h2>
             
@@ -190,50 +304,49 @@
 
                 <div class="glass-panel hover-scale p-8 rounded-[32px] md:col-span-2">
                     <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-2xl font-semibold">Chair</h3>
-                        <span class="text-xs font-bold text-white bg-accent/20 border border-accent/30 px-3 py-1 rounded-full">Mar 2026 - Present</span>
+                        <h3 class="text-2xl font-semibold">Chairperson</h3>
+                        <span class="text-xs font-bold text-white bg-accent/20 border border-accent/30 px-3 py-1 rounded-full badge-live">Feb 2026 – Present</span>
                     </div>
-                    <p class="text-accent text-lg font-medium mb-1">IEEE CASS Student Branch Chapter</p>
-                    <p class="text-sm text-white/50 mb-4">TKMCE · Kollam, Kerala</p>
-                    <p class="text-textDim leading-relaxed">Leading operations and strategic planning for the CASS Student Branch chapter.</p>
+                    <p class="text-accent text-lg font-medium mb-1">IEEE Circuits and Systems Society SB · TKMCE</p>
+                    <p class="text-sm text-white/50 mb-4">Kollam, Kerala</p>
+                    <p class="text-textDim leading-relaxed">Leading operations and strategic planning for the CASS Student Branch. Organizing workshops on FPGA prototyping, IC design, and analog circuit design. Previously served as Vice Chair (Jan 2025 – Mar 2026).</p>
                 </div>
                 
                 <div class="glass-panel hover-scale p-8 rounded-[32px]">
                     <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-2xl font-semibold">Vice Chair</h3>
-                        <span class="text-xs font-bold text-white bg-accent/20 border border-accent/30 px-3 py-1 rounded-full">Dec 2025 - Feb 2026</span>
+                        <h3 class="text-2xl font-semibold">Project Intern</h3>
+                        <span class="text-xs font-bold text-white bg-white/10 border border-white/20 px-3 py-1 rounded-full">May–Jun 2025</span>
                     </div>
-                    <p class="text-accent text-lg font-medium mb-1">IEEE CAS SB TKMCE</p>
-                    <p class="text-sm text-white/50 mb-4">Kollam, Kerala (On-site)</p>
-                    <p class="text-textDim leading-relaxed">Full-time role focused on FPGA prototyping and Analog Circuit Design.</p>
+                    <p class="text-accent text-lg font-medium mb-1">Believers Church Medical College Hospital</p>
+                    <p class="text-sm text-white/50 mb-4">Tiruvalla, Kerala (On-site)</p>
+                    <p class="text-textDim leading-relaxed">Developed sleep apnea detection system using MPU6050. Analyzed chest movement patterns to detect abnormal breathing events.</p>
                 </div>
 
                 <div class="glass-panel hover-scale p-8 rounded-[32px]">
                     <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-2xl font-semibold">Project Intern</h3>
-                        <span class="text-xs font-bold text-white bg-white/10 border border-white/20 px-3 py-1 rounded-full">Jun 2025 (1 mo)</span>
+                        <h3 class="text-2xl font-semibold">Web Developer</h3>
+                        <span class="text-xs font-bold text-white bg-white/10 border border-white/20 px-3 py-1 rounded-full">Freelance</span>
                     </div>
-                    <p class="text-accent text-lg font-medium mb-1">Believers Church Medical College</p>
-                    <p class="text-sm text-white/50 mb-4">Tiruvalla, Kerala (On-site)</p>
-                    <p class="text-textDim leading-relaxed">Developed embedded devices and software for clinical applications.</p>
+                    <p class="text-accent text-lg font-medium mb-1">CDS Dubai</p>
+                    <p class="text-sm text-white/50 mb-4">Remote</p>
+                    <p class="text-textDim leading-relaxed">Developed and maintained production-level company website using HTML, CSS, JavaScript. Improved UI/UX and optimized performance.</p>
                 </div>
 
                 <div class="glass-panel hover-scale p-8 rounded-[32px] md:col-span-2 lg:col-span-1">
                     <h3 class="text-2xl font-semibold mb-1">Mathventures TKMCE</h3>
-                    <p class="text-sm text-white/50 mb-6">Full-time · 1 yr 8 mos</p>
-                    
+                    <p class="text-sm text-white/50 mb-6">1 yr 8 mos</p>
                     <div class="relative pl-6 border-l border-white/10 space-y-6">
                         <div class="relative">
                             <div class="absolute -left-[29px] top-1.5 w-3 h-3 bg-accent rounded-full border border-black"></div>
                             <h4 class="text-lg font-bold text-white">Design Head</h4>
-                            <p class="text-xs text-textDim mb-1">May 2025 - Present (9 mos)</p>
-                            <p class="text-sm text-textDim">Leading the creative team. Organized Placement Oriented C Programming Workshop.</p>
+                            <p class="text-xs text-textDim mb-1">May 2025 – Present</p>
+                            <p class="text-sm text-textDim">Leading creative team; organized Placement Oriented C Programming Workshop.</p>
                         </div>
                         <div class="relative">
                             <div class="absolute -left-[29px] top-1.5 w-3 h-3 bg-white/20 rounded-full border border-black"></div>
                             <h4 class="text-lg font-bold text-white">Designer</h4>
-                            <p class="text-xs text-textDim mb-1">Jun 2024 - May 2025 (1 yr)</p>
-                            <p class="text-sm text-textDim">Graphic design and branding.</p>
+                            <p class="text-xs text-textDim mb-1">Jun 2024 – May 2025</p>
+                            <p class="text-sm text-textDim">Graphic design and branding for technical events.</p>
                         </div>
                     </div>
                 </div>
@@ -241,23 +354,24 @@
                 <div class="glass-panel hover-scale p-8 rounded-[32px]">
                     <div class="flex justify-between items-start mb-2">
                         <h3 class="text-2xl font-semibold">Graphic Designer</h3>
-                        <span class="text-xs font-bold text-white bg-white/10 border border-white/20 px-3 py-1 rounded-full">Jan 2025 - Present</span>
+                        <span class="text-xs font-bold text-white bg-white/10 border border-white/20 px-3 py-1 rounded-full">Jan 2025 – Present</span>
                     </div>
                     <p class="text-accent text-lg font-medium mb-1">IEEE SB TKMCE</p>
-                    <p class="text-textDim leading-relaxed mt-4">Specialized in visual communication using Adobe Photoshop. Volunteered for AURORA 2025 & SIGNALS 2026.</p>
+                    <p class="text-textDim leading-relaxed mt-4">Visual communication using Adobe Photoshop. Volunteered for AURORA 2025 &amp; SIGNALS 2026.</p>
                 </div>
 
-                <div class="glass-panel hover-scale p-8 rounded-[32px] md:col-span-2">
+                <div class="glass-panel hover-scale p-8 rounded-[32px]">
                     <div class="flex justify-between items-start mb-2">
                         <h3 class="text-2xl font-semibold">Documentation Head</h3>
-                        <span class="text-xs font-bold text-white bg-white/10 border border-white/20 px-3 py-1 rounded-full">Nov 2024 - Jun 2025</span>
+                        <span class="text-xs font-bold text-white bg-white/10 border border-white/20 px-3 py-1 rounded-full">Nov 2024 – Jun 2025</span>
                     </div>
                     <p class="text-accent text-lg font-medium mb-1">Civil Service Aspirants' Club TKMCE</p>
-                    <p class="text-textDim leading-relaxed">Managed documentation and record-keeping for club activities (Part-time).</p>
+                    <p class="text-textDim leading-relaxed mt-4">Managed documentation and structured technical reports for club activities.</p>
                 </div>
             </div>
         </section>
 
+        <!-- PUBLICATIONS -->
         <section id="publications" class="mb-32">
             <h2 class="text-3xl font-bold mb-10 text-white pl-2 border-l-4 border-accent">Publications</h2>
             
@@ -271,16 +385,16 @@
                     
                     <div class="flex-grow">
                         <div class="flex flex-wrap gap-3 items-center mb-4">
-                            <span class="text-[10px] font-bold tracking-wider text-white bg-accent px-3 py-1 rounded-full shadow-md shadow-accent/30">RECENTLY PUBLISHED</span>
-                            <span class="text-[10px] font-bold tracking-wider text-accent border border-accent/30 bg-accent/10 px-3 py-1 rounded-full">IEEE Xplore</span>
+                            <span class="text-[10px] font-bold tracking-wider text-white bg-accent px-3 py-1 rounded-full shadow-md shadow-accent/30 badge-live">PUBLISHED ON IEEE XPLORE</span>
+                            <span class="text-[10px] font-bold tracking-wider text-accent border border-accent/30 bg-accent/10 px-3 py-1 rounded-full">ICAECT 2026</span>
                         </div>
                         
                         <h3 class="text-2xl md:text-3xl font-bold mb-3 text-white leading-tight">Artificial Intelligence Based Hardware Design for Efficient Detection of Cardiac Abnormalities</h3>
                         
-                        <p class="text-md text-white/80 font-medium mb-4">Presented at the 2026 Sixth International Conference on Advances in Electrical, Computing, Communication and Sustainable Technologies (ICAECT)</p>
+                        <p class="text-md text-white/80 font-medium mb-4">6th International Conference on Advances in Electrical, Computing, Communication and Sustainable Technologies (ICAECT), 2026</p>
                         
                         <p class="text-textDim mb-6 leading-relaxed max-w-4xl text-sm md:text-base">
-                            Published a diagnostic framework for cardiovascular disease that integrates a cloud-based Siamese Neural Network for real-time classification with a hardware-based phonocardiogram (PCG) acquisition module to extract and process essential heartbeats.
+                            A diagnostic framework for cardiovascular disease integrating a cloud-based Siamese Neural Network for real-time classification with a hardware-based phonocardiogram (PCG) acquisition module to extract and process essential heartbeats.
                         </p>
                         
                         <div class="flex flex-col sm:flex-row gap-6 sm:items-center">
@@ -294,8 +408,30 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Manuscript under review -->
+            <div class="glass-panel hover-scale p-8 rounded-[32px] mt-6 border border-teal-500/20 relative overflow-hidden">
+                <div class="flex flex-col md:flex-row gap-8 items-start">
+                    <div class="w-16 h-16 rounded-2xl bg-teal-500/20 flex items-center justify-center text-teal-400 text-2xl shrink-0">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex flex-wrap gap-3 items-center mb-4">
+                            <span class="text-[10px] font-bold tracking-wider text-teal-400 border border-teal-500/30 bg-teal-500/10 px-3 py-1 rounded-full">MANUSCRIPT SUBMITTED</span>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 text-white">High-Throughput Pipelined Architecture for ECG–PCG Classification</h3>
+                        <p class="text-textDim text-sm leading-relaxed">Designed an 8-stage pipelined Twin Neural Network hardware accelerator for real-time biomedical signal classification. Design efficiency validated using the full Cadence RTL-to-GDSII flow (Xcelium → Genus → Innovus).</p>
+                        <div class="flex gap-2 mt-4">
+                            <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/60">Verilog</span>
+                            <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/60">Cadence Innovus</span>
+                            <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/60">ASIC Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
+        <!-- SKILLS -->
         <section id="skills" class="mb-32">
             <h2 class="text-3xl font-bold mb-10 text-white pl-2 border-l-4 border-accent">Technical Proficiency</h2>
             
@@ -306,49 +442,52 @@
                         <i class="fas fa-code text-accent"></i> Programming
                     </h3>
                     <div class="space-y-5">
-                        <div><div class="flex justify-between text-sm mb-2"><span>Python</span> <span>5/5</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-full"></div></div></div>
-                        <div><div class="flex justify-between text-sm mb-2"><span>C / C++</span> <span>4.5/5</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[90%]"></div></div></div>
-                        <div><div class="flex justify-between text-sm mb-2"><span>Embedded C</span> <span>4/5</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[80%]"></div></div></div>
-                        <div><div class="flex justify-between text-sm mb-2"><span>Verilog</span> <span>3/5</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[60%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>C / Embedded C</span><span class="text-white/40">Advanced</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[90%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>Verilog (RTL)</span><span class="text-white/40">Proficient</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[70%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>Python</span><span class="text-white/40">Intermediate</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[65%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>JavaScript / HTML / CSS</span><span class="text-white/40">Intermediate</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[60%]"></div></div></div>
                     </div>
                 </div>
 
                 <div class="glass-panel hover-scale p-8 rounded-[32px]">
                     <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
-                        <i class="fas fa-microchip text-accent"></i> Embedded
+                        <i class="fas fa-microchip text-accent"></i> Embedded Platforms
                     </h3>
                     <div class="space-y-5">
-                        <div><div class="flex justify-between text-sm mb-2"><span>ESP32 / Sensors</span> <span>5/5</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-full"></div></div></div>
-                        <div><div class="flex justify-between text-sm mb-2"><span>Comms Protocols</span> <span>4/5</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[80%]"></div></div></div>
-                        <div><div class="flex justify-between text-sm mb-2"><span>STM32 / RISC-V</span> <span>4/5</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[80%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>ESP32 / Arduino</span><span class="text-white/40">Expert</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-full"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>STM32 (N6 / H7 / F4)</span><span class="text-white/40">Advanced</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[80%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>VEGA RISC-V</span><span class="text-white/40">Proficient</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[65%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>8051</span><span class="text-white/40">Proficient</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[60%]"></div></div></div>
                     </div>
                 </div>
 
                 <div class="glass-panel hover-scale p-8 rounded-[32px]">
                     <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
-                        <i class="fas fa-layer-group text-accent"></i> VLSI & PCB
+                        <i class="fas fa-layer-group text-accent"></i> VLSI & EDA Tools
                     </h3>
                     <div class="space-y-5">
-                        <div><div class="flex justify-between text-sm mb-2"><span>EasyEDA / KiCad / LTSpice</span> <span>5/5</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-full"></div></div></div>
-                        <div><div class="flex justify-between text-sm mb-2"><span>Cadence / Vivado</span> <span>3/5</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[60%]"></div></div></div>
-                        <div><div class="flex justify-between text-sm mb-2"><span>Xcelium</span> <span>3/5</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[60%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>Cadence Xcelium (Simulation)</span><span class="text-white/40">Proficient</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[65%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>Cadence Genus (Synthesis)</span><span class="text-white/40">Proficient</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[60%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>Cadence Innovus (P&amp;R)</span><span class="text-white/40">Proficient</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[55%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>EasyEDA / KiCad / LTSpice</span><span class="text-white/40">Advanced</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[80%]"></div></div></div>
                     </div>
                 </div>
 
                 <div class="glass-panel hover-scale p-8 rounded-[32px]">
                     <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
-                        <i class="fas fa-cube text-accent"></i> Prototyping
+                        <i class="fas fa-cube text-accent"></i> Prototyping & Design
                     </h3>
                     <div class="space-y-5">
-                        <div><div class="flex justify-between text-sm mb-2"><span>Arduino</span> <span>5/5</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-full"></div></div></div>
-                        <div><div class="flex justify-between text-sm mb-2"><span>Fusion 360 / 3D Print</span> <span>4/5</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[80%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>PCB Design</span><span class="text-white/40">Advanced</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[80%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>Fusion 360 / 3D Printing</span><span class="text-white/40">Advanced</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[75%]"></div></div></div>
+                        <div><div class="flex justify-between text-sm mb-2"><span>Adobe Photoshop / Figma</span><span class="text-white/40">Advanced</span></div><div class="h-1.5 w-full bg-white/10 rounded-full"><div class="h-full progress-fill rounded-full w-[80%]"></div></div></div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- PROJECTS -->
         <section id="projects" class="mb-32">
-            
             <h2 class="text-3xl font-bold mb-10 text-white pl-2 border-l-4 border-accent">Innovation & Research</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
                 
@@ -356,46 +495,67 @@
                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600"></div>
                     <div class="flex justify-between items-start mb-4">
                         <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400"><i class="fas fa-heartbeat"></i></div>
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-green-400 bg-green-500/10 px-3 py-1 rounded-full">IEEE Xplore</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-green-400 bg-green-500/10 px-3 py-1 rounded-full">IEEE Xplore ✓</span>
                     </div>
                     <h3 class="text-xl font-bold mb-2">AI Cardiac Abnormality Detection</h3>
-                    <p class="text-textDim text-sm mb-6 flex-grow">Diagnostic framework combining a hardware PCG acquisition module with a cloud-based Siamese Neural Network. Presented at IEEE ICAECT 2026.</p>
-                    <div class="flex gap-2 text-xs font-medium text-white/60"><span class="bg-white/10 px-2 py-1 rounded">PCG Signals</span><span class="bg-white/10 px-2 py-1 rounded">SNN</span></div>
-                </div>
-
-                <div class="glass-panel hover-scale p-8 rounded-[32px] flex flex-col h-full relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400"><i class="fas fa-lungs"></i></div>
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full">Clinical</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">ApneaSense</h3>
-                    <p class="text-textDim text-sm mb-6 flex-grow">Wearable embedded system for sleep apnea monitoring developed during BCMCH project internship.</p>
-                    <div class="flex gap-2 text-xs font-medium text-white/60"><span class="bg-white/10 px-2 py-1 rounded">STM32</span><span class="bg-white/10 px-2 py-1 rounded">IoT</span></div>
-                </div>
-                
-                <div class="glass-panel hover-scale p-8 rounded-[32px] flex flex-col h-full relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-red-600"></div>
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400"><i class="fas fa-mask"></i></div>
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-orange-400 bg-orange-500/10 px-3 py-1 rounded-full">Safety</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">ToxGuard</h3>
-                    <p class="text-textDim text-sm mb-6 flex-grow">Wearable industrial safety system for gas leak detection.</p>
-                    <div class="flex gap-2 text-xs font-medium text-white/60"><span class="bg-white/10 px-2 py-1 rounded">ESP32</span><span class="bg-white/10 px-2 py-1 rounded">Figma</span></div>
+                    <p class="text-textDim text-sm mb-6 flex-grow">Hardware PCG acquisition module + Siamese Neural Network. Presented at IEEE ICAECT 2026. Now live on IEEE Xplore.</p>
+                    <div class="flex gap-2 text-xs font-medium text-white/60 flex-wrap"><span class="bg-white/10 px-2 py-1 rounded">PCG Signals</span><span class="bg-white/10 px-2 py-1 rounded">SNN</span><span class="bg-white/10 px-2 py-1 rounded">VHDL</span></div>
                 </div>
 
                 <div class="glass-panel hover-scale p-8 rounded-[32px] flex flex-col h-full relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-teal-600"></div>
                     <div class="flex justify-between items-start mb-4">
-                        <div class="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center text-teal-400"><i class="fas fa-robot"></i></div>
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-teal-400 bg-teal-500/10 px-3 py-1 rounded-full">Hackathon Winner</span>
+                        <div class="w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center text-teal-400"><i class="fas fa-microchip"></i></div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-teal-400 bg-teal-500/10 px-3 py-1 rounded-full">Manuscript Submitted</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Autonomous Agri Rover</h3>
-                    <p class="text-textDim text-sm mb-6 flex-grow">Hardware-based agricultural rover powered by VEGA RISC-V processor. Won 3rd Prize at CARBON X National Hardware Hackathon (VEGATHON Track).</p>
-                    <div class="flex gap-2 text-xs font-medium text-white/60"><span class="bg-white/10 px-2 py-1 rounded">RISC-V</span><span class="bg-white/10 px-2 py-1 rounded">Robotics</span></div>
+                    <h3 class="text-xl font-bold mb-2">Pipelined ECG–PCG Classifier</h3>
+                    <p class="text-textDim text-sm mb-6 flex-grow">8-stage pipelined Twin Neural Network hardware accelerator. Full Cadence RTL-to-GDSII validation (Xcelium → Genus → Innovus).</p>
+                    <div class="flex gap-2 text-xs font-medium text-white/60 flex-wrap"><span class="bg-white/10 px-2 py-1 rounded">Verilog</span><span class="bg-white/10 px-2 py-1 rounded">ASIC</span><span class="bg-white/10 px-2 py-1 rounded">Cadence</span></div>
                 </div>
 
+                <div class="glass-panel hover-scale p-8 rounded-[32px] flex flex-col h-full relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-orange-500"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400"><i class="fas fa-trophy"></i></div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-yellow-400 bg-yellow-500/10 px-3 py-1 rounded-full">3rd Prize · Mar 2026</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Autonomous Agri Rover</h3>
+                    <p class="text-textDim text-sm mb-6 flex-grow">CARBON X National Hardware Hackathon (VEGATHON track). Autonomous navigation on VEGA RISC-V with custom Verilog sensor modules.</p>
+                    <div class="flex gap-2 text-xs font-medium text-white/60 flex-wrap"><span class="bg-white/10 px-2 py-1 rounded">RISC-V</span><span class="bg-white/10 px-2 py-1 rounded">Verilog</span><span class="bg-white/10 px-2 py-1 rounded">Robotics</span></div>
+                </div>
+
+                <div class="glass-panel hover-scale p-8 rounded-[32px] flex flex-col h-full relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400"><i class="fas fa-brain"></i></div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full">Embedded AI</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">ECG Classifier on STM32 N6 &amp; H7</h3>
+                    <p class="text-textDim text-sm mb-6 flex-grow">Edge AI model for real-time abnormal ECG classification optimized for high-performance STM32 N6 and H7 MCUs.</p>
+                    <div class="flex gap-2 text-xs font-medium text-white/60 flex-wrap"><span class="bg-white/10 px-2 py-1 rounded">STM32 N6</span><span class="bg-white/10 px-2 py-1 rounded">TinyML</span></div>
+                </div>
+
+                <div class="glass-panel hover-scale p-8 rounded-[32px] flex flex-col h-full relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400"><i class="fas fa-lungs"></i></div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full">Clinical · BCMCH</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">ApneaSense</h3>
+                    <p class="text-textDim text-sm mb-6 flex-grow">Wearable sleep apnea detection using MPU6050. Chest movement pattern analysis developed during BCMCH project internship.</p>
+                    <div class="flex gap-2 text-xs font-medium text-white/60"><span class="bg-white/10 px-2 py-1 rounded">STM32</span><span class="bg-white/10 px-2 py-1 rounded">MPU6050</span></div>
+                </div>
+
+                <div class="glass-panel hover-scale p-8 rounded-[32px] flex flex-col h-full relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-red-500"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400"><i class="fas fa-shield-alt"></i></div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-orange-400 bg-orange-500/10 px-3 py-1 rounded-full">Robocon '26</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Smart Wearable Health Guardian</h3>
+                    <p class="text-textDim text-sm mb-6 flex-grow">ESP32 IoT wearable with real-time web monitoring, edge-level risk scoring, and predictive safety analysis. Showcased at Robocon 2026.</p>
+                    <div class="flex gap-2 text-xs font-medium text-white/60 flex-wrap"><span class="bg-white/10 px-2 py-1 rounded">ESP32</span><span class="bg-white/10 px-2 py-1 rounded">IoT</span><span class="bg-white/10 px-2 py-1 rounded">Dashboard</span></div>
+                </div>
             </div>
 
             <h2 class="text-3xl font-bold mb-10 text-white pl-2 border-l-4 border-accent">Core Electronics</h2>
@@ -403,7 +563,7 @@
                 <div class="glass-panel hover-scale p-8 rounded-[32px] flex flex-col h-full">
                     <div class="flex justify-between items-start mb-4">
                         <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400"><i class="fas fa-microchip"></i></div>
-                        <span class="text-[10px] font-mono text-white/40">Jan - May 2025</span>
+                        <span class="text-[10px] font-mono text-white/40">Jan – May 2025</span>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Password Circuit Breaker</h3>
                     <p class="text-textDim text-sm mb-6 flex-grow">8051-based security system with EEPROM password storage and custom PCB.</p>
@@ -412,7 +572,7 @@
                 <div class="glass-panel hover-scale p-8 rounded-[32px] flex flex-col h-full">
                     <div class="flex justify-between items-start mb-4">
                         <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400"><i class="fas fa-users"></i></div>
-                        <span class="text-[10px] font-mono text-white/40">Jun - Dec 2024</span>
+                        <span class="text-[10px] font-mono text-white/40">Jun – Dec 2024</span>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Digital Visitor Counter</h3>
                     <p class="text-textDim text-sm mb-6 flex-grow">Automated room capacity monitoring using IR sensors and 4026 IC.</p>
@@ -421,15 +581,16 @@
                 <div class="glass-panel hover-scale p-8 rounded-[32px] flex flex-col h-full">
                     <div class="flex justify-between items-start mb-4">
                         <div class="w-10 h-10 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-400"><i class="fas fa-solar-panel"></i></div>
-                        <span class="text-[10px] font-mono text-white/40">Sep - Dec 2023</span>
+                        <span class="text-[10px] font-mono text-white/40">Sep – Dec 2023</span>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Sun Tracking Solar Panel</h3>
-                    <p class="text-textDim text-sm mb-6 flex-grow">Dual-axis tracker using Arduino Uno and LDRs for max efficiency.</p>
+                    <p class="text-textDim text-sm mb-6 flex-grow">Dual-axis tracker using Arduino Uno and LDRs for maximum efficiency.</p>
                     <div class="flex gap-2 text-xs font-medium text-white/60"><span class="bg-white/10 px-2 py-1 rounded">Arduino</span><span class="bg-white/10 px-2 py-1 rounded">Servo</span></div>
                 </div>
             </div>
         </section>
 
+        <!-- EDUCATION -->
         <section id="education" class="mb-20">
             <h2 class="text-3xl font-bold mb-10 text-white pl-2 border-l-4 border-accent">Education & Certs</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -441,10 +602,12 @@
                     <div>
                         <h3 class="text-xl font-bold">B.Tech ECE</h3>
                         <p class="text-textDim">TKM College of Engineering, Kollam</p>
-                        <p class="text-sm text-accent mt-1 mb-2">Sep 2023 - May 2027</p>
+                        <p class="text-sm text-accent mt-1 mb-3">2022 – 2026</p>
+                        <p class="text-xs text-textDim mb-2">Relevant Coursework: Digital Electronics, Microcontrollers, Signal Processing, VLSI Design</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/70">AutoCAD</span>
-                            <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/70">Networking</span>
+                            <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/70">ASIC Design</span>
+                            <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/70">DSP</span>
+                            <span class="text-xs bg-white/10 px-2 py-1 rounded text-white/70">VLSI</span>
                         </div>
                     </div>
                 </div>
@@ -454,19 +617,32 @@
                         <div class="absolute top-0 right-0 bg-accent text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">NEW</div>
                         <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-xl shrink-0"><i class="fas fa-certificate"></i></div>
                         <div>
-                            <h3 class="text-lg font-bold">Embedded Systems</h3>
-                            <p class="text-sm text-textDim">Coursera | EDUCBA</p>
+                            <h3 class="text-lg font-bold">Embedded Systems using C</h3>
+                            <p class="text-sm text-textDim">Coursera · EDUCBA — Dec 2025</p>
                         </div>
                     </div>
                     <div class="glass-panel hover-scale p-6 rounded-[24px] flex items-center gap-4">
                         <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-xl shrink-0"><i class="fab fa-java"></i></div>
                         <div>
                             <h3 class="text-lg font-bold">Programming in Java</h3>
-                            <p class="text-sm text-textDim">NPTEL (Jul 2024 - Oct 2025)</p>
+                            <p class="text-sm text-textDim">NPTEL — Jul 2024 · Oct 2025</p>
+                        </div>
+                    </div>
+                    <div class="glass-panel hover-scale p-6 rounded-[24px] flex items-center gap-4 relative overflow-hidden border border-accent/20">
+                        <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-xl shrink-0 text-accent"><i class="fas fa-drafting-compass"></i></div>
+                        <div>
+                            <h3 class="text-lg font-bold">Analog IC Design — Cadence Tools</h3>
+                            <p class="text-sm text-textDim">Workshop — Oct 2025</p>
+                        </div>
+                    </div>
+                    <div class="glass-panel hover-scale p-6 rounded-[24px] flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-xl shrink-0"><i class="fas fa-server"></i></div>
+                        <div>
+                            <h3 class="text-lg font-bold">FPGA-Based SoC Prototyping</h3>
+                            <p class="text-sm text-textDim">Workshop</p>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -478,6 +654,7 @@
             <a href="https://www.linkedin.com/in/muhammed-ameen-pm-4955b7286" class="hover:text-white transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
             <a href="https://github.com/RNH2-Ameen" class="hover:text-white transition-colors"><i class="fab fa-github text-xl"></i></a>
             <a href="mailto:ameenpmnh3@gmail.com" class="hover:text-white transition-colors"><i class="fas fa-envelope text-xl"></i></a>
+            <a href="https://portfolio-ashen-gamma-45.vercel.app/" class="hover:text-white transition-colors"><i class="fas fa-globe text-xl"></i></a>
         </div>
     </footer>
 
